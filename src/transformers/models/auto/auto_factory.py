@@ -581,11 +581,17 @@ class _BaseAutoModelClass:
                 The model to register.
         """
         if hasattr(model_class, "config_class") and str(model_class.config_class) != str(config_class):
-            raise ValueError(
+            warnings.warn(
                 "The model class you are passing has a `config_class` attribute that is not consistent with the "
                 f"config class you passed (model has {model_class.config_class} and you passed {config_class}. Fix "
                 "one of those so they match!"
             )
+
+#            raise ValueError(
+#                "The model class you are passing has a `config_class` attribute that is not consistent with the "
+#                f"config class you passed (model has {model_class.config_class} and you passed {config_class}. Fix "
+#                "one of those so they match!"
+#            )
         cls._model_mapping.register(config_class, model_class, exist_ok=exist_ok)
 
 
